@@ -6,16 +6,16 @@ public class PlayerController : MonoBehaviour{
 
     Rigidbody rb;
     Animator anim;
-
-    Transform player;
+    Vector3 moveVector;
+    CharacterController controller;
     
     int frameFlicker = 0;
-
     float zero = 0;
 
     [SerializeField]
     float speed;
-
+    [SerializeField]
+    float moveSpeed;
     [SerializeField]
     float jumpForce;
     
@@ -24,11 +24,11 @@ public class PlayerController : MonoBehaviour{
         // init call
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        player = GetComponent<Transform>();
+        controller = GetComponent<CharacterController> ();
     }
     // Start is called before the first frame update
     void Start(){
-        //rb.velocity = Vector3.forward * speed;
+        rb.velocity = Vector3.forward * speed;
     }
 
     // Update is called once per frame
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour{
         
         //change to screen touch
 
-        if(frameFlicker == 30){
+        if(frameFlicker == 60){
             rb.velocity = Vector3.forward * speed;
             frameFlicker = 0;
         }else{
@@ -45,23 +45,24 @@ public class PlayerController : MonoBehaviour{
 
         if(Input.GetMouseButtonDown(0)){
             anim.SetTrigger("jump");
-            //rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            turnLeft();
+            //controller.Move((Vector3.up * jumpForce) * Time.deltaTime);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-    }
+        if (Input.GetKeyDown(KeyCode.A)){
+            //moveRight();
+            rb.AddForce(Vector3.left * moveSpeed, ForceMode.Force);
+        }
+        if (Input.GetKeyUp(KeyCode.A)){
+            //moveRight();
+            rb.AddForce(Vector3.left * moveSpeed * -1, ForceMode.Force);
+        }
+        if (Input.GetKeyDown(KeyCode.D)){
+            //moveRight();
+            rb.AddForce(Vector3.right * moveSpeed, ForceMode.Force);
+        }
 
-    void turnLeft(){
-
-        player.Rotate(Vector3.up, -90);
-        rb.velocity = Vector3.forward * 0;
         
-
     }
 
-    void turnRight(){
-
-        player.Rotate(Vector3.up, 90);
-
-    }
 }
