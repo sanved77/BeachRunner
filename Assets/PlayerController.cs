@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour{
     }
     // Start is called before the first frame update
     void Start(){
-        rb.velocity = Vector3.forward * speed;
+        //rb.velocity = Vector3.forward * speed;
     }
 
     // Update is called once per frame
@@ -36,12 +36,14 @@ public class PlayerController : MonoBehaviour{
         
         //change to screen touch
 
-        if(frameFlicker == 60){
+        /* if(frameFlicker == 60){
             rb.velocity = Vector3.forward * speed;
             frameFlicker = 0;
         }else{
             frameFlicker++;
-        }
+        }*/
+
+        rb.AddForce(Vector3.forward * moveSpeed);
 
         if(Input.GetMouseButtonDown(0)){
             anim.SetTrigger("jump");
@@ -51,15 +53,12 @@ public class PlayerController : MonoBehaviour{
 
         if (Input.GetKeyDown(KeyCode.A)){
             //moveRight();
-            rb.AddForce(Vector3.left * moveSpeed, ForceMode.Force);
+            rb.AddForce(Vector3.left * moveSpeed);
         }
-        if (Input.GetKeyUp(KeyCode.A)){
-            //moveRight();
-            rb.AddForce(Vector3.left * moveSpeed * -1, ForceMode.Force);
-        }
+
         if (Input.GetKeyDown(KeyCode.D)){
             //moveRight();
-            rb.AddForce(Vector3.right * moveSpeed, ForceMode.Force);
+            rb.AddForce(Vector3.right * moveSpeed);
         }
 
         

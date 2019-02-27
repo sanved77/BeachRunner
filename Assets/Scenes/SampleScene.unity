@@ -2668,8 +2668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d285acfadac28489ec460806ba6bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
-  moveSpeed: 2.2
+  speed: 6.5
+  moveSpeed: 80
   jumpForce: 4
 --- !u!143 &2074017868
 CharacterController:
