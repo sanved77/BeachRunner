@@ -46,11 +46,32 @@ public class PlayerController : MonoBehaviour{
 
         //rb.AddForce(Vector3.forward * moveSpeed);
 
-        /* if(Input.GetMouseButtonDown(0)){
-            anim.SetTrigger("jump");
-            //controller.Move((Vector3.up * jumpForce) * Time.deltaTime);
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }*/
+        if(Input.GetMouseButtonDown(0)){
+            
+            float x = Input.mousePosition.x;
+            float y = Input.mousePosition.y;
+
+            if(x >= 45 && x <= 135){
+                if(y >= 55 && y <= 145){
+                    //print("Left key");
+                    rb.AddForce(Vector3.left * moveSpeed);
+                }
+            }
+            else if(x >= 340 && x <= 435){
+                if(y >= 55 && y <= 145){
+                    //print("Right key");
+                    rb.AddForce(Vector3.right * moveSpeed);
+                }
+            }
+            else {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                anim.SetTrigger("jump");
+            }
+
+            /* string a;
+            a = string.Format("x - {0}, y - {1}" , x, y);
+            print(a);*/
+        }
 
         if (Input.GetKeyUp(KeyCode.A)){
             //controller.Move((Vector3.left * moveSpeed) * Time.deltaTime);
